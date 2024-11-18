@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor de Noticias</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Mi Noticiario</h1>
+    <nav>
+      <div class="popover-menu">
+        <button class="menu-button">☰</button>
+        <ul class="popover-content">
+          <li><a href="#" data-category="World News">Mundo</a></li>
+          <li><a href="#" data-category="Sport">Deportes</a></li>
+          <li><a href="#" data-category="Finance">Finanzas</a></li>
+          <li><a href="#" data-category="Technology">Tecnología</a></li>
+          <li><a href="#" data-category="Entertainment">Entretenimiento</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <news-viewer></news-viewer>
+  </main>
+
+  <template id="article-template">
+    <div class="article">
+      <h3 class="title"></h3>
+      <p><strong>Autor:</strong> <span class="author"></span></p>
+      <p class="description clamp"></p>
+      <a class="read-more" href="#">Leer más</a>
+    </div>
+  </template>
+
+  <script src="news-viewer.js"></script>
+  <script>
+    // Manejo del menú desplegable
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuButton = document.querySelector('.menu-button');
+      const popoverContent = document.querySelector('.popover-content');
+
+      menuButton.addEventListener('click', () => {
+        popoverContent.classList.toggle('visible');
+      });
+
+      // Cerrar el menú si se hace clic fuera
+      document.addEventListener('click', (event) => {
+        if (!menuButton.contains(event.target) && !popoverContent.contains(event.target)) {
+          popoverContent.classList.remove('visible');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
